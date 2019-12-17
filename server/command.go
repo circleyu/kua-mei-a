@@ -7,13 +7,6 @@ import (
 	"github.com/mattermost/mattermost-server/plugin"
 )
 
-// commandHelp is the text you see when you type /feed help
-const commandHelp = `* |/feed subscribe url| - Connect your Mattermost channel to an rss feed 
- * |/feed list| - Lists the rss feeds you have subscribed to
- * |/feed unsubscribe url| - Unsubscribes the Mattermost channel from the rss feed`
-
-// + `* |/feed initiate| - initiates the rss feed subscription poller`
-
 const displayName = "妹子紳士"
 const iconURL = "https://pngimg.com/uploads/trollface/trollface_PNG28.png"
 
@@ -44,5 +37,10 @@ func (p *LookGirlPlugin) ExecuteCommand(c *plugin.Context, args *model.CommandAr
 	if command != "/看妹子" {
 		return &model.CommandResponse{}, nil
 	}
-	return getCommandResponse(model.COMMAND_RESPONSE_TYPE_EPHEMERAL, "![](https://api.ooopn.com/image/beauty/api.php?type=jump)"), nil
+	imageURL, code := getImangURL()
+
+	if strings.Compare(code, "200") != 0 {
+		return &model.CommandResponse{}, nil
+	}
+	return getCommandResponse(model.COMMAND_RESPONSE_TYPE_EPHEMERAL, "![]("+imageURL+")"), nil
 }

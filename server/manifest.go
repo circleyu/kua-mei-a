@@ -6,6 +6,6 @@ var manifest = struct {
 	ID      string
 	Version string
 }{
-	ID:      "lookgirls",
-	Version: "1.0.0",
+	ID:      "kua-mei-a",
+	Version: "1.1.0",
 }
